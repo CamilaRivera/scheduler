@@ -6,10 +6,12 @@ import Show from "./Show";
 
 export default function Appointment({ id, interview, time }) {
   return (
+    <article className = "appointment">
     <Fragment>
       <Header time={time}></Header>
       {interview && <Show interviewer={interview.interviewer} student={interview.student}></Show>}
       {!interview && <Empty></Empty>}
     </Fragment>
+    </article>
   )
 }
