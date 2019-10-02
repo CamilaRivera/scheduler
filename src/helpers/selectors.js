@@ -19,3 +19,12 @@ export function getAppointmentsForDay(state, day) {
   }
   return appointmentsPerDay;
 }
+
+export function getInterview(state, interview) {
+  if (interview) {
+    const index = interview.interviewer;
+    return { ...interview, interviewer: state.interviewers[index] };
+  } else {
+    return null;
+  }
+}
