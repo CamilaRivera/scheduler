@@ -6,6 +6,7 @@ import Show from "./Show";
 import Status from "./Status";
 import Form from "./Form";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import { useVisualMode } from "../../hooks/useVisualMode"
 
 const EMPTY = "EMPTY";
@@ -15,6 +16,8 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment({ id, interview, time, interviewers, bookInterview, cancelInterview }) {
 
@@ -25,15 +28,17 @@ export default function Appointment({ id, interview, time, interviewers, bookInt
     };
     transition(SAVING);
     bookInterview(id, interview)
-      .then(() => transition(SHOW));
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true));;
 
   }
 
   function deleteInterview() {
     transition(CONFIRM);
-    transition(DELETING);
+    transition(DELETING, true);
     cancelInterview(id)
-      .then(() => transition(EMPTY));
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE, true));
 
   }
 
@@ -41,6 +46,7 @@ export default function Appointment({ id, interview, time, interviewers, bookInt
     interview ? SHOW : EMPTY
   );
 
+  
   return (
     <article className="appointment">
       <Fragment>
@@ -54,11 +60,13 @@ export default function Appointment({ id, interview, time, interviewers, bookInt
             onEdit = {(event) => { transition(EDIT) }}
           />
         )}
-        {mode === CREATE && <Form onSave={save} interviewers={interviewers} onCancel={(event) => { back(EMPTY) }} />}
+        {mode === CREATE && <Form onSave={save} interviewers={interviewers} interviewer ={interviewers[0].id} onCancel={(event) => { back(EMPTY) }} />}
         {mode === EDIT && <Form onSave={save} name={interview.student} interviewer = {interview.interviewer.id} interviewers={interviewers} onCancel={(event) => { back(SHOW) }} />}
         {mode === SAVING && <Status message = {"Saving"}/>}
         {mode === DELETING && <Status message = {"Deleting"}/>}
         {mode === CONFIRM && <Confirm onConfirm = {deleteInterview} onCancel={(event) => { transition(SHOW) }} message = {"Are you sure you would like to delete this?"}/>}
+        {mode === ERROR_DELETE && <Error onClose = {() => {back();back();}}/>}
+        {mode === ERROR_SAVE && <Error onClose = {() => {back();back();}}/>}
       </Fragment>
 
     </article>

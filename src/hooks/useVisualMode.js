@@ -6,16 +6,19 @@ export function useVisualMode(initialMode) {
 
   function transition(newMode, replace = false) {
     if(!replace){
-      history.push(newMode);
+      setHistory(prev => prev.concat(newMode));
     }
     setMode(newMode);
   }
 
   function back() {
     if (history.length > 1) {
-      history.pop(history[history.length - 1]);
-    }
-    setMode(history[history.length-1]);
+      setHistory((prev) => {
+        const newHistory = prev.slice(0, -1);
+        setMode(newHistory[newHistory.length-1]);
+        return newHistory;
+      });
+    } 
   }
 
   return { mode, transition, back };

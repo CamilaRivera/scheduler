@@ -30,6 +30,10 @@ export default function Application(props) {
     return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
       .then(response => {
         setState(prev => ({...prev, appointments }));
+      })
+      .catch(error => {
+        console.log(error);
+        throw error;
       });
     
   };
@@ -42,6 +46,10 @@ export default function Application(props) {
           newState.appointments[id].interview = null;
           return newState;
         });
+      })
+      .catch(error => {
+        console.log(error);
+        throw error;
       });
   }
 
