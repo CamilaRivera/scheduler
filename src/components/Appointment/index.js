@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import "./styles.scss";
 import Header from "./Header";
 import Empty from "./Empty";
@@ -46,13 +46,23 @@ export default function Appointment({ id, interview, time, interviewers, bookInt
     interview ? SHOW : EMPTY
   );
 
+  useEffect(() => {
+    if(interview && mode === EMPTY){
+      transition(SHOW);
+    }
+
+    else if(!interview && mode === SHOW){
+      transition(EMPTY);
+    }
+    
+  },[interview, mode, transition]);
   
   return (
     <article className="appointment">
       <Fragment>
         <Header time={time}></Header>
         {mode === EMPTY && <Empty onAdd={(event) => { transition(CREATE) }} />}
-        {mode === SHOW && (
+        {mode === SHOW && interview && (
           <Show 
             onDelete = {(event) => {transition(CONFIRM)}}
             student={interview.student}

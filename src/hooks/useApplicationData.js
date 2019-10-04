@@ -14,6 +14,11 @@ export function useApplicationData() {
     appointments: (state, value) => {
       return { ...state, appointments: value };
     },
+    appointment: (state, value) => { // value = {id: 2, interview: null, time: 1} (appointment)
+      const newAppointment = {...(state.appointments[value.id] || {}), ...value};
+      const appointments = {...state.appointments, [value.id]: newAppointment};
+      return { ...state, appointments };
+    },
     interviewers: (state, value) => {
       return { ...state, interviewers: value };
     },
@@ -34,16 +39,12 @@ export function useApplicationData() {
   });
 
   function getSpots(day) {
-    let spots = 0;
+    let spots = [];
     const appointmentsPerDay = getAppointmentsForDay(state, day);
 
-    appointmentsPerDay.forEach(appointment => {
-      if (appointment.interview === null) {
-        spots++;
-      }
-    });
+    spots = appointmentsPerDay.filter(appointment => appointment.interview === null);
 
-    return spots;
+    return spots.length;
   };
 
   function bookInterview(id, interview) {
@@ -90,6 +91,17 @@ export function useApplicationData() {
       const value = { days: all[0].data, appointments: all[1].data, interviewers: all[2].data };
       dispatchState({ value, type: "all" });
     })
+      var socket = new WebSocket("ws://localhost:8001");
+      socket.onopen = function (event) {
+        socket.send("ping");
+      };
+      socket.onmessage = function (event) {
+        const messageObject = JSON.parse(event.data);
+        if(messageObject.type === "SET_INTERVIEW"){
+          const value =  {id: messageObject.id, interview: messageObject.interview};
+          dispatchState({ value, type: "appointment" });
+        }
+      }
   }, []);
 
   return { state, dispatchState, bookInterview, cancelInterview, getSpots }
