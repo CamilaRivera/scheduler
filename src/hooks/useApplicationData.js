@@ -93,7 +93,7 @@ export function useApplicationData() {
     })
       var socket = new WebSocket("ws://localhost:8001");
       socket.onopen = function (event) {
-        socket.send("ping");
+        //socket.send("ping");
       };
       socket.onmessage = function (event) {
         const messageObject = JSON.parse(event.data);
