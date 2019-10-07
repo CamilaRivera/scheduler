@@ -32,7 +32,7 @@ return(
         onChange={(event) => setName(event.target.value)}
       />
     </form>
-    <InterviewerList interviewers={interviewers} interviewer={interviewer} setInterviewer={setInterviewer} />
+    <InterviewerList interviewers={interviewers} value={interviewer} onChange={setInterviewer} />
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">
