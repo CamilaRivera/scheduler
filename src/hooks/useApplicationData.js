@@ -57,7 +57,7 @@ export function useApplicationData() {
       [id]: appointment
     };
 
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
+    return axios.put(`/api/appointments/${id}`, { interview })
       .then(response => {
         dispatchState({ value: appointments, type: "appointments" })
       })
@@ -69,7 +69,7 @@ export function useApplicationData() {
   };
 
   function cancelInterview(id) {
-    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+    return axios.delete(`/api/appointments/${id}`)
       .then(response => {
         const newState = JSON.parse(JSON.stringify(state));
         newState.appointments[id].interview = null
@@ -84,9 +84,9 @@ export function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      Promise.resolve(axios.get("http://localhost:8001/api/days")),
-      Promise.resolve(axios.get("http://localhost:8001/api/appointments")),
-      Promise.resolve(axios.get("http://localhost:8001/api/interviewers"))
+      Promise.resolve(axios.get("/api/days")),
+      Promise.resolve(axios.get("/api/appointments")),
+      Promise.resolve(axios.get("/api/interviewers"))
     ]).then(all => {
       const value = { days: all[0].data, appointments: all[1].data, interviewers: all[2].data };
       dispatchState({ value, type: "all" });

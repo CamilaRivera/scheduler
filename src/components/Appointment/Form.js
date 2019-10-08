@@ -25,7 +25,7 @@ export default function Form({name:initialName, interviewer: initialInterviewer,
       setError("Student name cannot be blank");
       return;
     }
-  
+    setError("");
     onSave(name, interviewer);
   }
 

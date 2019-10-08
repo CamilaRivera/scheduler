@@ -58,7 +58,7 @@ export default function Appointment({ id, interview, time, interviewers, bookInt
   },[interview, mode, transition]);
   
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Fragment>
         <Header time={time}></Header>
         {mode === EMPTY && <Empty onAdd={(event) => { transition(CREATE) }} />}
