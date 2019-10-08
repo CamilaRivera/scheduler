@@ -24,7 +24,10 @@ import classNames from "classnames";
       'day-list__item--full': (spots === 0)
     })
     return (
-      <li className = {dayClass} onClick={() => dispatchState({type: "day", value: name})}>
+      <li 
+      className = {dayClass} 
+      onClick={() => dispatchState({type: "day", value: name})}
+      data-testid =  "day">
         <h2 className="text--regular">{name}</h2> 
         <h3 className="text--light">{formatSpots(spots)}</h3>
       </li>
