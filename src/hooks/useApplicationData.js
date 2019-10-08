@@ -2,34 +2,17 @@ import { useEffect, useReducer } from "react";
 import axios from 'axios';
 import { getAppointmentsForDay } from "./../helpers/selectors";
 
+import reduceState, {
+  day,
+  days,
+  appointments,
+  appointment,
+  interviewers,
+  all
+} from "../reducers/application";
+
+
 export function useApplicationData() {
-
-  const stateLookup = {
-    day: (state, value) => {
-      return { ...state, day: value };
-    },
-    days: (state, value) => {
-      return { ...state, days: value };
-    },
-    appointments: (state, value) => {
-      return { ...state, appointments: value };
-    },
-    appointment: (state, value) => { // value = {id: 2, interview: null, time: 1} (appointment)
-      const newAppointment = {...(state.appointments[value.id] || {}), ...value};
-      const appointments = {...state.appointments, [value.id]: newAppointment};
-      return { ...state, appointments };
-    },
-    interviewers: (state, value) => {
-      return { ...state, interviewers: value };
-    },
-    all: (state, value) => {
-      return { ...state, ...value }
-    }
-  };
-
-  const reduceState = (state, action) => {
-    return stateLookup[action.type](state, action.value) || state;
-  };
 
   let [state, dispatchState] = useReducer(reduceState, {
     day: "Monday",

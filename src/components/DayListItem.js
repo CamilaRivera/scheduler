@@ -27,7 +27,7 @@ import classNames from "classnames";
       <li 
       className = {dayClass} 
       onClick={() => dispatchState({type: "day", value: name})}
-      data-testid =  "day">
+      data-testid = "day">
         <h2 className="text--regular">{name}</h2> 
         <h3 className="text--light">{formatSpots(spots)}</h3>
       </li>
