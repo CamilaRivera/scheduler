@@ -8,7 +8,7 @@ React application that allows users to book and cancel interviews
 ### Booked interview
 !["Booked interview"](https://github.com/CamilaRivera/scheduler/blob/master/docs/booked_interview.png?raw=true)
 ### Delete interview confirmation
-!["Delete interview confirmation"](hhttps://github.com/CamilaRivera/scheduler/blob/master/docs/delete_confirmation.png?raw=true)
+!["Delete interview confirmation"](https://github.com/CamilaRivera/scheduler/blob/master/docs/delete_confirmation.png?raw=true)
 ### Book/Edit interview
 !["Book/Edit interview"](https://github.com/CamilaRivera/scheduler/blob/master/docs/book_edit_interview.png?raw=true)
 
