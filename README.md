@@ -4,13 +4,13 @@ React application that allows users to book and cancel interviews
 ## Final Product
 
 ### Landing Page
-!["Landing Page"](https://github.com/CamilaRivera/tinyapp/blob/master/docs/landing_page.png?raw=true)
-### URL Creation
-!["URL Creation"](https://github.com/CamilaRivera/tinyapp/blob/master/docs/url_creation.png?raw=true)
-### Edit/New URL
-!["Edit/New URL"](https://github.com/CamilaRivera/tinyapp/blob/master/docs/edit_new_url.png?raw=true)
-### Registration
-!["Registration"](https://github.com/CamilaRivera/tinyapp/blob/master/docs/registration.png?raw=true)
+!["Landing Page"](https://github.com/CamilaRivera/scheduler/blob/master/docs/landing.png?raw=true)
+### Booked interview
+!["Booked interview"](https://github.com/CamilaRivera/scheduler/blob/master/docs/booked_interview.png?raw=true)
+### Delete interview confirmation
+!["Delete interview confirmation"](hhttps://github.com/CamilaRivera/scheduler/blob/master/docs/delete_confirmation.png?raw=true)
+### Book/Edit interview
+!["Book/Edit interview"](https://github.com/CamilaRivera/scheduler/blob/master/docs/book_edit_interview.png?raw=true)
 
 
 
