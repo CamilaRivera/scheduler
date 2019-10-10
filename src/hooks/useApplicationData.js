@@ -2,14 +2,7 @@ import { useEffect, useReducer } from "react";
 import axios from 'axios';
 import { getAppointmentsForDay } from "./../helpers/selectors";
 
-import reduceState, {
-  day,
-  days,
-  appointments,
-  appointment,
-  interviewers,
-  all
-} from "../reducers/application";
+import reduceState from "../reducers/application";
 
 
 export function useApplicationData() {
