@@ -1,5 +1,5 @@
 # Interview Scheduler
-React application that allows users to book and cancel interviews
+React application that allows users to book and cancel interviews.
 
 ## Final Product
 
@@ -52,7 +52,7 @@ npm run storybook
 
 
 ## Getting Started
-1) Fork this repository, then clone your fork of this repository.
+1) Clone this repository to your local machine.
 2) Install dependencies with npm install.
 3) Run the [Custom API Server](https://github.com/lighthouse-labs/scheduler-api)
 4) Run the Webpack Development Server with npm start. The app will be served at http://localhost:8000/

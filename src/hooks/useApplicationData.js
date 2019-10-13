@@ -7,7 +7,7 @@ import reduceState from "../reducers/application";
 
 export function useApplicationData() {
 
-  let [state, dispatchState] = useReducer(reduceState, {
+  const [state, dispatchState] = useReducer(reduceState, {
     day: "Monday",
     days: [],
     appointments: {},
@@ -15,10 +15,9 @@ export function useApplicationData() {
   });
 
   function getSpots(day) {
-    let spots = [];
     const appointmentsPerDay = getAppointmentsForDay(state, day);
 
-    spots = appointmentsPerDay.filter(appointment => appointment.interview === null);
+    const spots = appointmentsPerDay.filter(appointment => appointment.interview === null);
 
     return spots.length;
   };
@@ -60,24 +59,24 @@ export function useApplicationData() {
 
   useEffect(() => {
     Promise.all([
-      Promise.resolve(axios.get("/api/days")),
-      Promise.resolve(axios.get("/api/appointments")),
-      Promise.resolve(axios.get("/api/interviewers"))
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers")
     ]).then(all => {
       const value = { days: all[0].data, appointments: all[1].data, interviewers: all[2].data };
       dispatchState({ value, type: "all" });
     })
-      var socket = new WebSocket("ws://localhost:8001");
-      socket.onopen = function (event) {
-        //socket.send("ping");
-      };
-      socket.onmessage = function (event) {
-        const messageObject = JSON.parse(event.data);
-        if(messageObject.type === "SET_INTERVIEW"){
-          const value =  {id: messageObject.id, interview: messageObject.interview};
-          dispatchState({ value, type: "appointment" });
-        }
+    const socket = new WebSocket("ws://localhost:8001");
+    socket.onopen = function (event) {
+      //socket.send("ping");
+    };
+    socket.onmessage = function (event) {
+      const messageObject = JSON.parse(event.data);
+      if (messageObject.type === "SET_INTERVIEW") {
+        const value = { id: messageObject.id, interview: messageObject.interview };
+        dispatchState({ value, type: "appointment" });
       }
+    }
   }, []);
 
   return { state, dispatchState, bookInterview, cancelInterview, getSpots }

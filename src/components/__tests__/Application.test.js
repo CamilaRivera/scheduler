@@ -125,7 +125,7 @@ describe("Application", () => {
   });
 
   it("shows the save error when failing to save an appointment", async () => {
-    
+
     const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -158,7 +158,7 @@ describe("Application", () => {
 
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
     expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
-    
+
   });
 
   it("shows the delete error when failing to delete an existing appointment", async () => {
